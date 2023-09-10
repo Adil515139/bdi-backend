@@ -3,6 +3,8 @@ package com.taskapplication.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +27,16 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping()
-    public Task createTask(@RequestBody Task task) {
-        return taskService.saveTask(task);
+    public ResponseEntity<Object> createTask(@RequestBody Task task) {
+    	if(task.getTitle().isEmpty())
+    	{
+    		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+    	}else {
+    	taskService.saveTask(task);
+    		
+    		return new ResponseEntity<Object>(HttpStatus.CREATED);
+    	}
+
     }
 
     @GetMapping("/{id}")
