@@ -1,8 +1,7 @@
 # bdi-backend
 
 Steps to run the code:
-Backend -
-To run the Backend code:
+
 1.	git clone  https://github.com/Adil515139/bdi-backend.git
 2.	Import maven project in any JAVA IDE (STS/Eclipse).
 3.	Build the Spring Boot application
