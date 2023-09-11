@@ -21,6 +21,15 @@ Library/Tools/DB:
 7.	MySQL
 8.	IDE - Eclipse or Spring Tool Suite (STS)
 
+Database Schema – 
+CREATE TABLE `task` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) DEFAULT NULL,
+  `priority` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 
