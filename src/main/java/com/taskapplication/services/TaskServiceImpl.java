@@ -33,16 +33,17 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public Task updateTask(Long id, Task updatedTask) {
-		Task task = taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not exist with id :" + id));
-		
-			task.setTitle(updatedTask.getTitle());
-			task.setDescription(updatedTask.getDescription());
-			task.setPriority(updatedTask.getPriority());
-			
-			Task updatedTaskValue=taskRepository.save(task);
-			
-			return updatedTaskValue;
-		
+		Task task = taskRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Task not exist with id :" + id));
+
+		task.setTitle(updatedTask.getTitle());
+		task.setDescription(updatedTask.getDescription());
+		task.setPriority(updatedTask.getPriority());
+
+		Task updatedTaskValue = taskRepository.save(task);
+
+		return updatedTaskValue;
+
 	}
 
 	@Override

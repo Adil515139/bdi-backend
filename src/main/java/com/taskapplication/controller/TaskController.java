@@ -23,41 +23,46 @@ import com.taskapplication.services.TaskService;
 @CrossOrigin(origins = "*")
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
+	@Autowired
+	private TaskService taskService;
 
-    @PostMapping()
-    public ResponseEntity<Object> createTask(@RequestBody Task task) {
-    	if(task.getTitle().isEmpty())
-    	{
-    		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
-    	}else {
-    	taskService.saveTask(task);
-    		
-    		return new ResponseEntity<Object>(HttpStatus.CREATED);
-    	}
+	@PostMapping()
+	public ResponseEntity<Object> createTask(@RequestBody Task task) {
+		if (task.getTitle().isEmpty()) {
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		} else {
+			taskService.saveTask(task);
 
-    }
+			return new ResponseEntity<Object>(HttpStatus.CREATED);
+		}
 
-    @GetMapping("/{id}")
-    public Task getTaskById(@PathVariable Long id) {
-        return taskService.findTaskById(id);
-    }
+	}
 
-    @GetMapping()
-    public List<Task> getAllTasks() {
-        return taskService.findAllTask();
-    }
+	@GetMapping("/{id}")
+	public Task getTaskById(@PathVariable Long id) {
+		return taskService.findTaskById(id);
+	}
 
-    @PutMapping("/{id}")
-    public Task updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
-    	return taskService.updateTask(id,updatedTask);
+	@GetMapping()
+	public List<Task> getAllTasks() {
+		return taskService.findAllTask();
+	}
 
-    }
+	@PutMapping("/{id}")
+	public ResponseEntity<Object> updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
+		if (updatedTask.getTitle().isEmpty()) {
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		} else {
+			taskService.updateTask(id, updatedTask);
 
-    @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Long id) {
-        taskService.deleteTaskById(id);
-    }
+			return new ResponseEntity<Object>(HttpStatus.CREATED);
+		}
+
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteTask(@PathVariable Long id) {
+		taskService.deleteTaskById(id);
+	}
 
 }
